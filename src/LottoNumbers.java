@@ -1,13 +1,32 @@
+
 // Import Scanner class
 import java.util.Scanner;
 
 //Public class
 public class LottoNumbers
 {
+
+    // checks to make sure the numbers are within range
+    public static int inRange(int number, int min, int max)
+    {
+
+        while(number < min)
+        {
+            number += max;
+        }
+
+        while(number > max)
+        {
+            number -= max;
+        }
+
+        return number;
+    }
+
     // main
     public static void main(String[] args)
     {
-        //Sets input as new scanner; Asks for user's name; Greets user
+        // Sets input as new scanner; Asks for user's name; Greets user
         Scanner input = new Scanner(System.in);
         System.out.print("Enter your name: ");
         String name = input.next();
@@ -16,34 +35,34 @@ public class LottoNumbers
         // begins do-while loop for starting again
         do
         {
-            // Asks user questions; converts answer to lowercase; checks to see if answer begins with 'y'; error checks with check1 
+            // Asks user questions; converts answer to lowercase; checks to see if answer
+            // begins with 'y'; error checks with check1
             System.out.println("Would you like to continue the interactive portion?  Yes or No");
             String answer = input.next().toLowerCase();
             char value = answer.charAt(0);
-            
+
             // If user wants to continue with the interactive portion...
             if(value == 'y')
             {
                 System.out.println("Do you have a red car?  Yes or No");
                 String question1 = input.next().toLowerCase();
                 boolean check1 = question1.matches(".*\\d.*");
-                
-                    if(check1)
-                    {
-                        System.out.println("Invalid Operation.  Please try again.");
-                        break;
-                    }
+
+                if(check1)
+                {
+                    System.out.println("Invalid Operation.  Please try again.");
+                    break;
+                }
 
                 System.out.println("What is the name of your favorite pet?");
                 String question2 = input.next().toLowerCase();
                 boolean check2 = question1.matches(".*\\d.*");
 
-                    if(check2)
-                    {
-                        System.out.println("Invalid Operation.  Please try again.");
-                        break;
-                    }
-
+                if(check2)
+                {
+                    System.out.println("Invalid Operation.  Please try again.");
+                    break;
+                }
 
                 System.out.println("What is the age of your favorite pet?");
                 int question3 = input.nextInt();
@@ -53,7 +72,7 @@ public class LottoNumbers
 
                 System.out.println("Do you have a favorite quarterback?  What is their jersey number?");
                 int question5 = input.nextInt();
-
+                
                 System.out.println("What is the two digit model year of your car?");
                 int question6 = input.nextInt();
 
@@ -61,28 +80,24 @@ public class LottoNumbers
                 String question7 = input.next().toLowerCase();
                 boolean check7 = question1.matches(".*\\d.*");
 
-                    if(check7)
-                    {
-                        System.out.println("Invalid Operation.  Please try again.");
-                        break;
-                    }
+                if(check7)
+                {
+                    System.out.println("Invalid Operation.  Please try again.");
+                    break;
+                }
 
                 System.out.println("Enter a random number between 1 and 50.");
                 int question8 = input.nextInt();
 
-                // Lotto Numbers
-                // Declares min and max values
-                int randomNumberMin = 1;
-                int randomNumberMax = 65;
-                int magicBallMin = 1;
-                int magicBallMax = 75;
-                
-                // Calculates random numbers
-                double randomNumber1 = Math.floor(Math.random() * (randomNumberMax - randomNumberMin + 1) + randomNumberMin);
-                double randomNumber2 = Math.floor(Math.random() * (randomNumberMax - randomNumberMin + 1) + randomNumberMin);
-                double randomNumber3 = Math.floor(Math.random() * (randomNumberMax - randomNumberMin + 1) + randomNumberMin);
+                // Lotto & Magic Ball Numbers
 
-                // Magic Ball - question 4's answer multiplied by a random number; converts to int
+                // Calculates random numbers
+                double randomNumber1 = Math.floor(Math.random() * (65 - 1 + 1) + 1);
+                double randomNumber2 = Math.floor(Math.random() * (65 - 1 + 1) + 1);
+                double randomNumber3 = Math.floor(Math.random() * (65 - 1 + 1) + 1);
+
+                // Magic Ball - question 4's answer multiplied by a random number; converts to
+                // int
                 double magicBallDouble = question4 * randomNumber1;
                 int magicBall = (int) magicBallDouble;
 
@@ -101,85 +116,31 @@ public class LottoNumbers
                 // Magic Number 5 - Third letter of favorite pet's name
                 int magicNumber5 = question2.charAt(2);
 
-                // While loops to keep numbers below max range limit
-                while(magicNumber1 > randomNumberMax)
-                {
-                    magicNumber1 -= randomNumberMax;
-                }
-
-                while(magicNumber2 > randomNumberMax)
-                {
-                    magicNumber2 -= randomNumberMax;
-                }
-
-                while(magicNumber3 > randomNumberMax)
-                {
-                    magicNumber3 -= randomNumberMax;
-                }
-
-                while(magicNumber4 > randomNumberMax)
-                {
-                    magicNumber4 -= randomNumberMax;
-                }
-
-                while(magicNumber5 > randomNumberMax)
-                {
-                    magicNumber5 -= randomNumberMax;
-                }
-
-                while(magicBall > magicBallMax)
-                {
-                    magicBall -= magicBallMax;
-                }
-
-                // While loops to keep numbers above minimum range limit
-                while(magicNumber1 < randomNumberMin)
-                {
-                    magicNumber1 += randomNumberMin;
-                }
-
-                while(magicNumber2 < randomNumberMin)
-                {
-                    magicNumber2 += randomNumberMin;
-                }
-
-                while(magicNumber3 < randomNumberMin)
-                {
-                    magicNumber3 += randomNumberMin;
-                }
-
-                while(magicNumber4 < randomNumberMin)
-                {
-                    magicNumber4 += randomNumberMin;
-                }
-
-                while(magicNumber5 < randomNumberMin)
-                {
-                    magicNumber5 += randomNumberMin;
-                }
-
-                while(magicBall < magicBallMin)
-                {
-                    magicBall += magicBallMin;
-                }
+                // Using inRange() method to keep numbers below max range limit
+                magicBall = inRange(magicBall, 1, 75);
+                magicNumber1 = inRange(magicNumber1, 1, 65);
+                magicNumber2 = inRange(magicNumber2, 1, 65);
+                magicNumber3 = inRange(magicNumber3, 1, 65);
+                magicNumber4 = inRange(magicNumber4, 1, 65);
+                magicNumber5 = inRange(magicNumber5, 1, 65);
 
                 // Prints out lottery numbers with magic ball
                 System.out.println("Lottery Numbers: " + magicNumber1 + ", " + magicNumber2 + ", " + magicNumber3 + ", " + magicNumber4 + ", " + magicNumber5 + ". Magic ball: " + magicBall);
 
             }
-            
+
             // If user does not want to continue with the interactive portion
             else
             {
                 System.out.println("Please come back later to complete the survey...");
             }
-            
-            // End of do-while loop;  If user wants to play again, the loop will begin again
-            System.out.println("Do you want to play again? Yes or No");
+
+            // End of do-while loop; If user wants to play again, the loop will begin again
+            System.out.println("Do you want to play again? Please enter 'Yes' or 'No'");
         } while(input.next().toLowerCase().equals("yes"));
 
-    // End main curly bracket 
+        // End main curly bracket
     }
 
-// End public class Input curly bracket
+    // End public class Input curly bracket
 }
